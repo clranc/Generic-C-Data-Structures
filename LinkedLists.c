@@ -2,9 +2,7 @@
  * LinkedList
  ********************************************************************/
 
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "LinkedLists.h"
 
 void InitLinkedList(LinkedList *ListPtr){
@@ -13,13 +11,13 @@ void InitLinkedList(LinkedList *ListPtr){
     (*ListPtr).BackPtr = NULL;
 }
 
-void AddToFrontOfLinkedList(LinkedList *ListPtr, int DataPtr){
+void AddToFrontOfLinkedList(LinkedList *ListPtr, void * DataPtr){
     ListNode *NewNode;
     NewNode = (ListNode *)malloc(sizeof(ListNode));
     /* Set pointers for the node and set it to the front pointer of the list */
     (*NewNode).Next = (*ListPtr).FrontPtr;
     (*NewNode).Previous = NULL;
-    (*NewNode).state = DataPtr;
+    (*NewNode).node_val = DataPtr;
     (*ListPtr).FrontPtr = NewNode;
 
     /* If there are no elements in the list set the back pointer to be the n*/
@@ -33,12 +31,12 @@ void AddToFrontOfLinkedList(LinkedList *ListPtr, int DataPtr){
    (*ListPtr).NumElements++; 
 }
 
-void AddToBackOfLinkedList(LinkedList *ListPtr, int DataPtr){
+void AddToBackOfLinkedList(LinkedList *ListPtr, void * DataPtr){
     ListNode *NewNode;
     NewNode = (ListNode *)malloc(sizeof(ListNode));
     (*NewNode).Previous = (*ListPtr).BackPtr;
     (*NewNode).Next = NULL;
-    (*NewNode).state = DataPtr;
+    (*NewNode).node_val = DataPtr;
     (*ListPtr).BackPtr = NewNode;
 
     if((*ListPtr).NumElements == 0){
@@ -51,12 +49,12 @@ void AddToBackOfLinkedList(LinkedList *ListPtr, int DataPtr){
     (*ListPtr).NumElements++;
 }
 
-int RemoveFromFrontOfLinkedList(LinkedList *ListPtr){
-    int NewStruct;
+void * RemoveFromFrontOfLinkedList(LinkedList *ListPtr){
+    void * NewStruct;
     ListNode *NewNode;
 
     NewNode = (*ListPtr).FrontPtr;
-    NewStruct = (*(*ListPtr).FrontPtr).state;
+    NewStruct = (*(*ListPtr).FrontPtr).node_val;
 
     if ((*ListPtr).FrontPtr != (*ListPtr).BackPtr){
         (*ListPtr).FrontPtr = (*(*ListPtr).FrontPtr).Next;
@@ -73,8 +71,8 @@ int RemoveFromFrontOfLinkedList(LinkedList *ListPtr){
     return NewStruct;
 }
 
-int RemoveFromBackOfLinkedList(LinkedList *ListPtr){
-    int NewStruct = (*(*ListPtr).BackPtr).state;
+void * RemoveFromBackOfLinkedList(LinkedList *ListPtr){
+    void * NewStruct = (*(*ListPtr).BackPtr).node_val;
     ListNode *NewNode = (*ListPtr).BackPtr;
 
     if ((*ListPtr).FrontPtr != (*ListPtr).BackPtr){
@@ -106,6 +104,7 @@ void DestroyLinkedList(LinkedList *ListPtr){
 
         (*ListPtr).NumElements--;
         /* De-allocate the node storage */
+        free(NodePtr->node_val);
         free(NodePtr);
 
         if((*ListPtr).FrontPtr == NULL){
@@ -114,20 +113,5 @@ void DestroyLinkedList(LinkedList *ListPtr){
 
         (*(*ListPtr).FrontPtr).Previous = NULL;
 
-    }
-}
-
-void printList (LinkedList *ListPtr){
-    ListNode *Trav;
-    Trav = (*ListPtr).FrontPtr;
-
-    while(Trav != NULL){
-        if ((*Trav).Next != NULL){
-            printf("%d,",(*Trav).state);
-        }
-        else{
-            printf("%d\n",(*Trav).state); 
-        }
-        Trav = (*Trav).Next;
     }
 }

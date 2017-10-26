@@ -8,7 +8,6 @@
 /******************************************************************************
 * Modify structure ListElem to suit your application
 ******************************************************************************/
-#include <stdio.h>
 
 /**************  Nothing else in the module needs to be modified *************/
 
@@ -20,7 +19,7 @@
 typedef struct ListNode
   {
     /* The user information field */
-    int state;
+    void * node_val;
     /* Link pointers */
     struct ListNode *Next;
     struct ListNode *Previous;
@@ -47,35 +46,29 @@ void InitLinkedList(LinkedList *ListPtr);
 /******************************************************************************
 * Adds a node to the front of the list.
 ******************************************************************************/
-void AddToFrontOfLinkedList(LinkedList *ListPtr, int DataPtr);
+void AddToFrontOfLinkedList(LinkedList *ListPtr, void * DataPtr);
 
 /******************************************************************************
 * Adds a node to the back of the list.
 ******************************************************************************/
-void AddToBackOfLinkedList(LinkedList *ListPtr, int DataPtr);
+void AddToBackOfLinkedList(LinkedList *ListPtr, void * DataPtr);
 
 /*****************************************************************************
 * Removes a node from the front of the list and returns a pointer to the node
 * removed. On empty lists should return a NULL pointer.
 ******************************************************************************/
-int RemoveFromFrontOfLinkedList(LinkedList *ListPtr);
+void * RemoveFromFrontOfLinkedList(LinkedList *ListPtr);
 
 /******************************************************************************
 * Removes a node from the back of the list and returns a pointer to the node
 * removed. On empty lists should return a NULL pointer.
 ******************************************************************************/
-int RemoveFromBackOfLinkedList(LinkedList *ListPtr);
+void * RemoveFromBackOfLinkedList(LinkedList *ListPtr);
 
 /******************************************************************************
 * De-allocates the linked list and resets the struct fields (in the header) 
 * to indicate that the list is empty.
 ******************************************************************************/
 void DestroyLinkedList(LinkedList *ListPtr);
-
-
-/******************************************************************************
- * Prints out the given linked list
- *****************************************************************************/
-void printList (LinkedList *ListPtr);
 
 #endif /* _LINKED_LISTS_H_ */
