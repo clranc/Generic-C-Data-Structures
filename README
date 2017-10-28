@@ -1,0 +1,10 @@
+Generic-C-Data-Structures
+
+    A C project to create Generic Dynamic Data-structures for the C Programmer.
+I plan to add more structures as this project grows.  The structures will use
+void pointers to allow for them to operate as generically, so it will be ideal to
+apply appropriate casting when retrieving data from the data structures.
+
+Current working structures are as follows:
+    - Doubly Linked List
+    - Queue
