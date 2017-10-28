@@ -8,8 +8,8 @@ typedef enum{
 } customer_status;
 
 typedef struct Customer{
-    long time_waiting;
-    long processing_time;
+    unsigned long time_waiting;
+    unsigned long processing_time;
     customer_status status;
 } Customer;
 

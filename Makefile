@@ -3,7 +3,7 @@
 #
 
 # File Names
-SOURCE= TestList.c LinkedLists.c Customer.c
+SOURCE= TestList.c Queue.c LinkedLists.c Customer.c
 PROG=    TestList
 RESULTS= results.txt
 

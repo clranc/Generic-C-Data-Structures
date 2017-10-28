@@ -10,6 +10,7 @@
 #include <string.h>
 
 #include "Customer.h"
+#include "Queue.h"
 #include "LinkedLists.h"
 
 void printList(LinkedList * ll){
@@ -19,7 +20,7 @@ void printList(LinkedList * ll){
     trav_node = ll->FrontPtr;
     for(x = 0; x < ll->NumElements; x++){
         tmp = (Customer *)trav_node->node_val;
-        printf("Index:%d Node:%d\n", x, tmp->time_waiting);
+        printf("Index:%i Node:%lu\n", x, tmp->time_waiting);
         trav_node = trav_node->Next;
     }
 
@@ -28,44 +29,39 @@ void printList(LinkedList * ll){
 int main(int argc, char*argv[]){
 
     /* declare local variables */
-    int ErrorCode = 0;               /* Application error code - 0 is OK */
-    LinkedList TestLinkedList;      /* LinkedList for Data */
-    int input;
+    int ErrorCode = 0;               
+    Queue que;      /* LinkedList for Data */
     Customer * tmp;
     char a;
-    /* One command line argument is required: the file name     */
-    /*TestLinkedList = NULL;*/
-    /*TestNode = NULL;*/
 
-    InitLinkedList(&TestLinkedList);
+
+    initQueue(&que);
 
     while (1){
         printf("add (a), print (p),  pop head (h), quit(q): ");
-        scanf("%c", &a);
+        scanf(" %c", &a);
         if (a == 'a' ){
-            AddToBackOfLinkedList(&TestLinkedList, (void *)genCustomer());
+            enQueue(&que, (void *)genCustomer());
         }
-        else if (a == 'p' && TestLinkedList.NumElements > 0){
-            printList(&TestLinkedList);
+        else if (a == 'p' && *que.size > 0){
+            printList(&que.linked_list);
         }
 
-        else if (a == 'h' && TestLinkedList.NumElements > 0){
-        //    tmp = RemoveFromFrontOfLinkedList(&TestLinkedList);
-            tmp = (Customer *)RemoveFromFrontOfLinkedList(&TestLinkedList);
-            printf("popped : %d\n", tmp->time_waiting);
-            printList(&TestLinkedList);
+        else if (a == 'h' && *que.size > 0){
+            tmp = (Customer *)deQueue(&que);
+            printf("popped : %lu\n", tmp->time_waiting);
+            printList(&que.linked_list);
             free(tmp);
-        //    printf("Head : %d\nList :", tmp);
-        //    printList(&TestLinkedList);
         }
         else if (a == 'q'){
             break;
+            printf("\n");
         }
         printf("\n");
 
     }
 
-    DestroyLinkedList(&TestLinkedList);
+    destroyQueue(&que);
 
     return ErrorCode;
 } /* main() */
