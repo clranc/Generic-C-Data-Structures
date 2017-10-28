@@ -1,18 +1,25 @@
+/*******************************************************************
+ * File        : Queue.c
+ * Description : Routines for initializing Queues and utilizing 
+ *               them appropriately.
+ * Author      : Chris Ranc
+ ********************************************************************/
+
 #include "Queue.h"
 #include "stdlib.h"
 
 void initQueue(Queue * que){
-    InitLinkedList(&(que->linked_list));
+    initLinkedList(&(que->linked_list));
     que->size = &que->linked_list.NumElements;
     que->q_head = &que->linked_list.FrontPtr;
 }
 
 void enQueue(Queue * que, void * DataPtr){
-    AddToBackOfLinkedList(&que->linked_list, DataPtr);
+    addToBackOfLinkedList(&que->linked_list, DataPtr);
 }
 
 void * deQueue(Queue * que){
-    return RemoveFromFrontOfLinkedList(&que->linked_list);
+    return removeFromFrontOfLinkedList(&que->linked_list);
 }
 
 void * peek(Queue * que){
@@ -20,5 +27,5 @@ void * peek(Queue * que){
 }
 
 void destroyQueue(Queue * que){
-    DestroyLinkedList(&que->linked_list);
+    destroyLinkedList(&que->linked_list);
 }

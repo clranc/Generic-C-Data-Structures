@@ -1,8 +1,7 @@
 /*******************************************************************
- * LinkedList
- *    This program reads in a file and loads its contents into a
- *    linked list.  After which it prints the first 6 and last 6
- *    entre
+ * File        : Test.c
+ * Description : Play code for testing datastructures
+ * Author      : Chris Ranc
  ********************************************************************/
 
 #include <stdio.h>

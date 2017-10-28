@@ -1,17 +1,20 @@
-/*******************************************************************
- * LinkedList
- ********************************************************************/
+/***********************************************************************
+ * File        : LinkedLists.c
+ * Description : Routines for initializing Linked Lists and utilizing
+ *               them appropriately.
+ * Author      : Chris Ranc
+ ************************************************************************/
 
 #include <stdlib.h>
 #include "LinkedLists.h"
 
-void InitLinkedList(LinkedList *ListPtr){
+void initLinkedList(LinkedList *ListPtr){
     (*ListPtr).NumElements = 0;
     (*ListPtr).FrontPtr = NULL;
     (*ListPtr).BackPtr = NULL;
 }
 
-void AddToFrontOfLinkedList(LinkedList *ListPtr, void * DataPtr){
+void addToFrontOfLinkedList(LinkedList *ListPtr, void * DataPtr){
     ListNode *NewNode;
     NewNode = (ListNode *)malloc(sizeof(ListNode));
     /* Set pointers for the node and set it to the front pointer of the list */
@@ -28,10 +31,10 @@ void AddToFrontOfLinkedList(LinkedList *ListPtr, void * DataPtr){
         (*((*NewNode).Next)).Previous = NewNode;
     }
 
-   (*ListPtr).NumElements++; 
+   (*ListPtr).NumElements++;
 }
 
-void AddToBackOfLinkedList(LinkedList *ListPtr, void * DataPtr){
+void addToBackOfLinkedList(LinkedList *ListPtr, void * DataPtr){
     ListNode *NewNode;
     NewNode = (ListNode *)malloc(sizeof(ListNode));
     (*NewNode).Previous = (*ListPtr).BackPtr;
@@ -49,7 +52,7 @@ void AddToBackOfLinkedList(LinkedList *ListPtr, void * DataPtr){
     (*ListPtr).NumElements++;
 }
 
-void * RemoveFromFrontOfLinkedList(LinkedList *ListPtr){
+void * removeFromFrontOfLinkedList(LinkedList *ListPtr){
     void * NewStruct;
     ListNode *NewNode;
 
@@ -71,7 +74,7 @@ void * RemoveFromFrontOfLinkedList(LinkedList *ListPtr){
     return NewStruct;
 }
 
-void * RemoveFromBackOfLinkedList(LinkedList *ListPtr){
+void * removeFromBackOfLinkedList(LinkedList *ListPtr){
     void * NewStruct = (*(*ListPtr).BackPtr).node_val;
     ListNode *NewNode = (*ListPtr).BackPtr;
 
@@ -90,7 +93,7 @@ void * RemoveFromBackOfLinkedList(LinkedList *ListPtr){
     return NewStruct;
 }
 
-void DestroyLinkedList(LinkedList *ListPtr){
+void destroyLinkedList(LinkedList *ListPtr){
     int x;
     /* Declare a pointer to a node */
     ListNode *NodePtr;

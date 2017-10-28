@@ -3,8 +3,8 @@
 #
 
 # File Names
-SOURCE= TestList.c Queue.c LinkedLists.c Customer.c
-PROG=    TestList
+SOURCE= Test.c Queue.c LinkedLists.c Customer.c
+PROG=    Test
 RESULTS= results.txt
 
 # Compiler and Directives
