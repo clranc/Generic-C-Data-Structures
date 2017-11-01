@@ -56,6 +56,10 @@ void * removeFromFrontOfLinkedList(LinkedList *ListPtr){
     void * NewStruct;
     ListNode *NewNode;
 
+    if (ListPtr->NumElements == 0){
+        return NULL;
+    }
+
     NewNode = (*ListPtr).FrontPtr;
     NewStruct = (*(*ListPtr).FrontPtr).node_val;
 
@@ -75,8 +79,15 @@ void * removeFromFrontOfLinkedList(LinkedList *ListPtr){
 }
 
 void * removeFromBackOfLinkedList(LinkedList *ListPtr){
-    void * NewStruct = (*(*ListPtr).BackPtr).node_val;
-    ListNode *NewNode = (*ListPtr).BackPtr;
+    void * NewStruct;
+    ListNode *NewNode;
+
+    if (ListPtr->NumElements == 0){
+        return NULL;
+    }
+
+    NewStruct = (*(*ListPtr).BackPtr).node_val;
+    NewNode = (*ListPtr).BackPtr;
 
     if ((*ListPtr).FrontPtr != (*ListPtr).BackPtr){
         (*ListPtr).BackPtr = (*(*ListPtr).BackPtr).Previous;
